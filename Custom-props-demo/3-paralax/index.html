@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Demo#3</title>
+	<style>
+		* {
+		  font: inherit;
+		  margin: 0;
+		  padding: 0;
+		}
+		body {
+			height: 2000px;
+			background: black;
+		}
+
+		.scene {
+			position: absolute;
+			width: 100%;
+			transform: translateY(var(--translateY));
+			will-change: transform;
+		}
+	</style>
+	<script async src="https://s.electerious.com/basicScroll/dist/basicScroll.min.js"></script>
+	<script type="text/javascript">
+		// More information about this technique/pen:
+		// https://medium.com/@electerious/parallax-scrolling-with-js-controlled-css-variables-63cfe96820c7#.o1kkd4cte
+	window.onload = () => {
+		const scenes = document.querySelectorAll('.scene')
+
+		Array.prototype.forEach.call(scenes, (elem) => {
+			
+			const modifier = elem.getAttribute('data-modifier')
+			
+			basicScroll.create({
+				elem  : elem,
+				from  : 0,
+				to    : 519,
+				props : {
+					'--translateY': {
+						from   : '0',
+						to     : `${ 10 * modifier }px`,
+						direct : true
+					}
+				}
+			}).start()
+				
+		})
+	}
+	</script>
+</head>
+<body>
+	<img class="scene" data-modifier="30" src="https://parallaxbilder-qmogbogaoz.now.sh/p0.png">
+	<img class="scene" data-modifier="18" src="https://parallaxbilder-qmogbogaoz.now.sh/p1.png">
+	<img class="scene" data-modifier="12" src="https://parallaxbilder-qmogbogaoz.now.sh/p2.png">
+	<img class="scene" data-modifier="8" src="https://parallaxbilder-qmogbogaoz.now.sh/p3.png">
+	<img class="scene" data-modifier="6" src="https://parallaxbilder-qmogbogaoz.now.sh/p4.png">
+	<img class="scene" data-modifier="0" src="https://parallaxbilder-qmogbogaoz.now.sh/p6.png">
+</body>
+</html>
