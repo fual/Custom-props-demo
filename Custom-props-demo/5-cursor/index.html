@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Demo#5</title>
+	<style>
+  .iris {
+    --look: 0.7;
+    cx: calc(25px + 50px * var(--mouse-x, 0.7));
+  }
+  #svg-eyes {
+  background: hsl(20, 40%, 70%);
+  --font-size-multiplier: .8;
+}
+
+  #svg-eyes svg {
+    width: 90vw;
+  }
+
+  #svg-eyes #eye-white {
+    fill: white;
+  }
+
+  #svg-eyes #iris {
+    stroke: hsl(200, 50%, 50%);
+    stroke-width: 14;
+    fill: black;
+  }
+
+  #svg-eyes .second-eye {
+    x: 150px;
+  }
+	</style>
+	<script type="text/javascript">
+var root = document.documentElement;
+
+document.addEventListener("mousemove", evt => {
+  let x = evt.clientX / innerWidth;
+  let y = evt.clientY / innerHeight;
+
+  root.style.setProperty("--mouse-x", x);
+  root.style.setProperty("--mouse-y", y);
+});
+	</script>
+</head>
+<body id="svg-eyes">
+
+<svg viewBox="0 0 250 100">
+        <clipPath id="white-clip">
+          <path id="white-path" d="M1,50 a65,80 0 0,1 100,0 a80,80 0 0,1 -100,0 Z"></path>
+        </clipPath>
+        <use id="eye-white" href="#white-path"></use>
+        <use href="#eye-white" x="148"></use>
+        <circle id="iris" class="iris" cx="50" cy="45" r="18" clip-path="url(#white-clip)"></circle>
+        <use class="iris" href="#iris" x="148"></use>
+      </svg>
+
+</body>
+</html>
